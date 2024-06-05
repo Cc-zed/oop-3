@@ -1,0 +1,94 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Overcoat {
+private:
+    string type;
+    double price;
+
+public:
+    Overcoat(const string& t, double p) : type(t), price(p) {}
+
+    bool operator==(const Overcoat& other) const {
+        return (type == other.type && price == other.price);
+    }
+
+    Overcoat& operator=(const Overcoat& other) {
+        if (this != &other) {
+            type = other.type;
+            price = other.price;
+        }
+        return *this;
+    }
+
+    bool operator>(const Overcoat& other) const {
+        return price > other.price;
+    }
+
+    friend ostream& operator<<(ostream& os, const Overcoat& overcoat) {
+        os << "Type: " << overcoat.type << ", Price: " << overcoat.price;
+        return os;
+    }
+};
+
+class Flat {
+private:
+    double area;
+    string location;
+
+public:
+    Flat(double a, const string& l) : area(a), location(l) {}
+
+    bool operator==(const Flat& other) const {
+        return (area == other.area);
+    }
+
+    Flat& operator=(const Flat& other) {
+        if (this != &other) {
+            area = other.area;
+            location = other.location;
+        }
+        return *this;
+    }
+
+    bool operator>(const Flat& other) const {
+        return area > other.area;
+    }
+
+    friend ostream& operator<<(ostream& os, const Flat& flat) {
+        os << "Area: " << flat.area << " sq.m, Location: " << flat.location;
+        return os;
+    }
+};
+
+int main() {
+    Overcoat coat1("Winter Coat", 100);
+    Overcoat coat2("Spring Jacket", 80);
+
+    cout << "Comparison of Overcoats:" << endl;
+    if (coat1 == coat2) {
+        cout << "The coats are of the same type and price." << endl;
+    }
+    else if (coat1 > coat2) {
+        cout << "The first coat is more expensive than the second one." << endl;
+    }
+    else {
+        cout << "The second coat is more expensive than the first one." << endl;
+    }
+
+    Flat flat1(80, "Downtown");
+    Flat flat2(90, "Suburb");
+
+    cout << "\nComparison of Flats:" << endl;
+    if (flat1 == flat2) {
+        cout << "The flats have the same area." << endl;
+    }
+    else if (flat1 > flat2) {
+        cout << "The first flat is larger than the second one." << endl;
+    }
+    else {
+        cout << "The second flat is larger than the first one." << endl;
+    }
+}
