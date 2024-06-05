@@ -1,0 +1,147 @@
+#include <iostream>
+
+using namespace std;
+
+/*class Fraction {
+private:
+    int num;
+    int denom;
+
+    int gcd(int a, int b) const {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+
+public:
+    Fraction(int n, int d) : num(n), denom(d) {}
+
+    void simplify() {
+        int gcd_value = gcd(num, denom);
+        num /= gcd_value;
+        denom /= gcd_value;
+    }
+
+    Fraction operator+(const Fraction& other) const {
+        int n = num * other.denom + other.num * denom;
+        int d = denom * other.denom;
+        Fraction result(n, d);
+        result.simplify();
+        return result;
+    }
+
+    Fraction operator-(const Fraction& other) const {
+        int n = num * other.denom - other.num * denom;
+        int d = denom * other.denom;
+        Fraction result(n, d);
+        result.simplify();
+        return result;
+    }
+
+    Fraction operator*(const Fraction& other) const {
+        int n = num * other.num;
+        int d = denom * other.denom;
+        Fraction result(n, d);
+        result.simplify();
+        return result;
+    }
+
+    Fraction operator/(const Fraction& other) const {
+        int n = num * other.denom;
+        int d = denom * other.num;
+        Fraction result(n, d);
+        result.simplify();
+        return result;
+    }
+
+    void print() const {
+        cout << num << "/" << denom << endl;
+    }
+};
+
+int main() {
+    Fraction f1(3, 4);
+    Fraction f2(1, 2);
+
+    cout << "Addition:" << endl;
+    Fraction result_add = f1 + f2;
+    result_add.print();
+
+    cout << "Subtraction:" << endl;
+    Fraction result_sub = f1 - f2;
+    result_sub.print();
+
+    cout << "Multiplication:" << endl;
+    Fraction result_mul = f1 * f2;
+    result_mul.print();
+
+    cout << "Division:" << endl;
+    Fraction result_div = f1 / f2;
+    result_div.print();
+}*/
+
+
+class Complex {
+private:
+    double real;
+    double imaginary;
+
+public:
+    Complex(double r, double i) : real(r), imaginary(i) {}
+
+    Complex operator+(const Complex& other) const {
+        double r = real + other.real;
+        double i = imaginary + other.imaginary;
+        return Complex(r, i);
+    }
+
+    Complex operator-(const Complex& other) const {
+        double r = real - other.real;
+        double i = imaginary - other.imaginary;
+        return Complex(r, i);
+    }
+
+    Complex operator*(const Complex& other) const {
+        double r = real * other.real - imaginary * other.imaginary;
+        double i = real * other.imaginary + imaginary * other.real;
+        return Complex(r, i);
+    }
+
+    Complex operator/(const Complex& other) const {
+        double divisor = other.real * other.real + other.imaginary * other.imaginary;
+        double r = (real * other.real + imaginary * other.imaginary) / divisor;
+        double i = (imaginary * other.real - real * other.imaginary) / divisor;
+        return Complex(r, i);
+    }
+
+    void print() const {
+        if (imaginary >= 0)
+            cout << real << " + " << imaginary << "i" << endl;
+        else
+            cout << real << " - " << -imaginary << "i" << endl;
+    }
+};
+
+int main() {
+    Complex c1(2, 3);
+    Complex c2(1, -1);
+
+    cout << "Addition:" << endl;
+    Complex result_add = c1 + c2;
+    result_add.print();
+
+    cout << "Subtraction:" << endl;
+    Complex result_sub = c1 - c2;
+    result_sub.print();
+
+    cout << "Multiplication:" << endl;
+    Complex result_mul = c1 * c2;
+    result_mul.print();
+
+    cout << "Division:" << endl;
+    Complex result_div = c1 / c2;
+    result_div.print();
+}
